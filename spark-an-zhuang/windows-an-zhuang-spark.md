@@ -44,7 +44,9 @@ Saprk的安装比较简单，首先还是从官网进行下载 [Download Apache 
 
 ![Hadoop&#x4E0B;&#x8F7D;](../.gitbook/assets/image%20%2810%29.png)
 
-下载并解压到指定目录，然后到环境变量部分设置**HADOOP\_HOME**为Hadoop的解压目录，我这里是`F:\Program Files\hadoop`，然后再设置该目录下的bin目录到系统变量的**PATH**下，我这里也就是`F:\Program Files\hadoop\bin`，如果已经添加了**HADOOP\_HOME**系统变量，也可以用`%HADOOP_HOME%\bin`来指定bin文件夹路径名。这两个系统变量设置好后，开启一个新的cmd，然后直接输入`spark-shell`命令。
+下载并解压到指定目录，然后到环境变量部分设置**HADOOP\_HOME**为Hadoop的解压目录，我这里是 D:`\hadoop`，然后再设置该目录下的bin目录到系统变量的**PATH**下，我这里也就是D:`\hadoop\bin`，如果已经添加了**HADOOP\_HOME**系统变量，也可以用`%HADOOP_HOME%\bin`来指定bin文件夹路径名。这两个系统变量设置好后，开启一个新的cmd，然后直接输入`spark-shell`命令。
+
+这时候可以进cmd通过spark-shell来启动 spark了，但是我遇到空指针的错误。**主要是因为Hadoop的bin目录下没有winutils.exe文件的原因造成的，**于是需要从[https://github.com/steveloughran/winutils](https://github.com/steveloughran/winutils) 下载对应Hadoop版本号的winutils.exe文件，放到Hadoop解压文件下的bin文件夹中,我这里是D:`\hadoop\bin.`
 
 
 
