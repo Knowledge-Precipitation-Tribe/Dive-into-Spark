@@ -35,9 +35,26 @@
 
 ![](../.gitbook/assets/image%20%2819%29.png)
 
+**3）创建Maven工程**
+
+到这一步就开始创建Maven工程了，通过Maven对项目依赖到的Jar包进行理。
+
+在欢迎界面点击`Create New Project`，在打开的页面左侧边栏中，选择`Maven`，然后在右侧的`Project SDK`一项中，查看是否是正确的JDK配置项（如果每一步严格按照上文中的步骤操作的话，正常来说这一栏会自动填充的，如果这里没有正常显示JDK的话，可以点击右侧的`New...`按钮，然后指定JDK安装路径的根目录即可），然后点击`Next`，来到Maven项目最重要三个参数的设置页面，这三个参数分别为：`GroupId`, `ArtifactId`和`Version这三个属性需要你点击`ArtifactId的小箭头，设置好这三个属性和项目名以及项目位置以后可以进入项目页面了。  
 
 
+进来之后你会看到如下界面，接下来在main文件夹中建立一个名为 `scala` 的文件夹，并右键点击 `scala` 文件夹，选择 Make  Directory as，然后选择`Sources Root`，这里主要意思是将 `scala` 文件夹标记为一个源文件的根目录。
 
+![](../.gitbook/assets/image%20%2822%29.png)
+
+接下来在`scala` 文件夹 上，右键选择 `New`，然后选择 `Scala Class`，随后设置好程序的名称，并且记得将其设置为一个 `Object`，然后就可以看到IntelliJ IDEA自动添加了一些最基本的信息；在创建的 `Object` 中输入如下语句：
+
+```text
+def main(args: Array[String]):Unit = {
+  println("Spark Hello World!")
+}
+```
+
+**至此关于IDEA配置Spark就创建完成了！**
 
 
 
