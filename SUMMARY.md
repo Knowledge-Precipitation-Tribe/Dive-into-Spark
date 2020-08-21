@@ -9,6 +9,7 @@
 * [Spark RDDS](spark-rdds/README.md)
   * [RDDs 的特点](spark-rdds/rdds-de-te-dian.md)
   * [RDDs 的操作](spark-rdds/rdds-de-cao-zuo.md)
+  * [Transformations 详解](spark-rdds/transformations-xiang-jie.md)
 * [Spark Streaming](spark-streaming.md)
 * [Spark SQL](spark-sql.md)
 * [Graph X](graph-x.md)
