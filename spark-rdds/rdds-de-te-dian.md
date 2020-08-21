@@ -22,7 +22,7 @@
 
 由于RDD是只读的，因此想要改变RDD中的数据集，只能通过RDD的转换创建新的RDD。Spark提供RDD丰富的操作算子，实现一个RDD转化成另一个RDD，如下图所示。
 
-![](../.gitbook/assets/image%20%2827%29.png)
+![](../.gitbook/assets/image%20%2828%29.png)
 
 **3、依赖性**
 
@@ -46,7 +46,7 @@ RDDs通过操作算子进行转换，转换得到的新RDD包含了从其他RDDs
 >
 > 为此，RDD支持checkpoint将数据保存到持久化的存储中，这样就可以切断之前的血缘关系，因为checkpoint后的RDD不需要知道它的父RDDs了，它可以从checkpoint处拿到数据。
 
-![](../.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2827%29.png)
 
 
 
