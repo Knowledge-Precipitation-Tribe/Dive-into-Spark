@@ -176,9 +176,9 @@ randomSplitRDD(2).foreach(x => print(x +" "))
 1 3 4 5 7
 ```
 
+### **2、键值RDD的转换函数**
 
-
-
+**1）** **mapValus\(fun\):**对\[K,V\]型数据中的V值map操作。之间是窄依赖关系
 
 
 
