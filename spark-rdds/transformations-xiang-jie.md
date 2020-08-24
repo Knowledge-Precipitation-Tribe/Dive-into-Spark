@@ -125,6 +125,16 @@ println("重新分区后的分区个数:"+coalesceRDD.partitions.size)
 
 **输出:**
 
+```text
+重新分区前的分区个数4 重新分区后的分区个数:7
+```
+
+如果：val = coalesceRDD = rdd.coalesce\(7,false\)  输出为：
+
+```text
+重新分区前的分区个数4 重新分区后的分区个数:4
+```
+
 
 
 
