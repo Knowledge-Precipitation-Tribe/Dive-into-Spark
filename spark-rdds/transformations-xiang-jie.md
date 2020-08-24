@@ -92,15 +92,38 @@ cartesianRDD.foreach(x => print(x + " "))
 
 ![](../.gitbook/assets/image%20%2841%29.png)
 
-**8）10.coalesce\(numPartitions，shuffle\)**对RDD的分区进行重新分区，参数一：分区数；参数二：是否进行打乱。怎么理解参数二呢？coalesce是将分区数减少到numPartitions个分区，
+**8）10.coalesce\(numPartitions，shuffle\)**将分区数减少到numPartitions个分区的重新分区，参数一：分区数；参数二：是否进行打乱。怎么理解参数二呢？
 
-shuffle默认值为false,当shuffle=false时，不能增加分区数目,但不会报错，只是分区个数还是原来的
+当RDD有N个分区，需要重新划分成M个分区时：
 
+* N&gt;M：如果N，M之间相差的不多时，那么就可以将N个分区中的若干个分区合并成一个新的分区，最终合并为M个分区，之间存在窄依赖关系；如果N，M之间相差悬殊时，若M为1的时候，为了使coalesce之前的操作有更好的并行度，可以将shuffle设置为true。
+* N&lt;M：如果shuffle为false，不会进行分区，分区数依旧是N，之间为窄依赖；如果shuffle为true，重分区前后相当于宽依赖\(一般情况下N个分区有数据分布不均匀的状况，利用HashPartitioner函数将数据重新分区为M个\)
 
+N&gt;M的情况：
 
+```text
+val rdd = sc.parallelize(1 to 16 ,4)
+println("重新分区前的分区个数"+rdd.partitions.size)
+val coalesceRDD = rdd.coalesce(3,false)
+println("重新分区后的分区个数:"+coalesceRDD.partitions.size)
+```
 
+**输出：**
 
+```text
+重新分区前的分区个数4 重新分区后的分区个数:3
+```
 
+N&lt;M的情况：
+
+```text
+val rdd = sc.parallelize(1 to 16 ,4)
+println("重新分区前的分区个数"+rdd.partitions.size)
+val coalesceRDD = rdd.coalesce(7,true)
+println("重新分区后的分区个数:"+coalesceRDD.partitions.size)
+```
+
+**输出:**
 
 
 
