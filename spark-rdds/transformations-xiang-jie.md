@@ -90,7 +90,7 @@ cartesianRDD.foreach(x => print(x + " "))
 
 **RDD依赖图：**
 
-![](../.gitbook/assets/image%20%2841%29.png)
+![](../.gitbook/assets/image%20%2842%29.png)
 
 **8）10.coalesce\(numPartitions，shuffle\)**将分区数减少到numPartitions个分区的重新分区，参数一：分区数；参数二：是否进行打乱。怎么理解参数二呢？
 
@@ -135,17 +135,46 @@ println("重新分区后的分区个数:"+coalesceRDD.partitions.size)
 重新分区前的分区个数4 重新分区后的分区个数:4
 ```
 
+**9）** **repartition\(numPartition\)**是函数coalesce\(numPartition,true\)的实现，效果和coalesce\(numPartition,true\)的例子一样。
+
+**10）** **glom\(\)**将RDD每个分区中的类型为T的元素转化为数组Array\[T\]
+
+```text
+val rdd = sc.parallelize(1 to 6,2)
+val glomRDD = rdd.glom()
+glomRDD.foreach(x => println(x.getClass.getSimpleName))
+```
+
+**输出：**
+
+```text
+int[]
+int[]
+```
+
+RDD依赖关系图
+
+![](../.gitbook/assets/image%20%2841%29.png)
 
 
 
+ **11）randomSplit\(weight:Array\[Double\],seed\)**根据weight权重值将一个RDD划分成多个RDD,权重越高划分得到的元素较多的几率就越大。
 
+```text
+val rdd = sc.parallelize(1 to 10)
+val randomSplitRDD = rdd.randomSplit(Array(1.0,3.0,6.0))
+randomSplitRDD(0).foreach(x => print(x +" "))
+randomSplitRDD(1).foreach(x => print(x +" "))
+randomSplitRDD(2).foreach(x => print(x +" "))
+```
 
+**输出:**
 
-
-
-
-
-
+```text
+8 10 
+2 6 9
+1 3 4 5 7
+```
 
 
 
