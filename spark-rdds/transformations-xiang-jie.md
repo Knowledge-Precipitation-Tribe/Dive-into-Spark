@@ -217,7 +217,85 @@ flatMapValues.foreach(println)
 
 RDD依赖图：
 
+![](../.gitbook/assets/image%20%2844%29.png)
+
+**3）comineByKey**
+
+**4）foldByKey\(zeroValue\)\(func\)**
+
+**5）reduceByKey\(func,numPartitions\)** 对于每个分区中，按照Key值进行分组。参数一指的是聚合value值得函数；参数二指的是设置分区数，提高作业并行度。
+
+```text
+val data = List(("A", 3), ("A", 2), ("B", 1), ("B", 3))
+val rdd1 = src.parallelize(data,2)
+val reduceByKeyRDD = rdd1.reduceByKey(_ * _,2)
+reduceByKeyRDD.foreach(println)
+println(reduceByKeyRDD.partitions.size)
+```
+
+**输出：**
+
+```text
+(B,3)
+(A,6)
+2
+```
+
+**RDD**依赖图
+
 ![](../.gitbook/assets/image%20%2843%29.png)
+
+**6）groupByKey\(numPartitions\)** 按Key进行分组，返回\[K,Iterable\[V\]\]，numPartitions设置分区数，提高作业并行度
+
+```text
+val data = List(("A",1),("B",2),("A",2),("B",3))
+val rdd1 = src.parallelize(data,2)
+val groupByKeyRDD = rdd1.groupByKey(2)
+groupByKeyRDD.foreach(println)
+```
+
+**输出：**
+
+```text
+(B,CompactBuffer(2, 3))
+(A,CompactBuffer(1, 2))
+```
+
+**7）sortByKey\(accending，numPartitions\)** 返回以Key排序的（K,V）键值对组成的RDD，accending为true时表示升序，为false时表示降序，numPartitions设置分区数，提高作业并行度。
+
+```text
+val data = List(("A",1),("B",2),("A",2),("B",3))
+val rdd1 = src.parallelize(data,2)
+val sortByKeyRDD = rdd1.sortByKey(false,2)
+sortByKeyRDD.foreach(println)
+```
+
+**输出：**
+
+```text
+(B,2)
+(B,3)
+(A,1)
+(A,2)
+```
+
+**8）cogroup\(otherDataSet，numPartitions\)：**对两个RDD\(如:\(K,V\)和\(K,W\)\)相同Key的元素先分别做聚合，最后返回\(K,Iterator&lt;V&gt;,Iterator&lt;W&gt;\)形式的RDD,numPartitions设置分区数，提高作业并行度
+
+**9）join\(otherDataSet,numPartitions\):**对两个RDD先进行cogroup操作形成新的RDD，再对每个Key下的元素进行笛卡尔积，numPartitions设置分区数，提高作业并行度
+
+**10）LeftOutJoin\(otherDataSet，numPartitions\):**左外连接，包含左RDD的所有数据，如果右边没有与之匹配的用None表示,numPartitions设置分区数，提高作业并行度
+
+**11）RightOutJoin\(otherDataSet, numPartitions\):**右外连接，包含右RDD的所有数据，如果左边没有与之匹配的用None表示,numPartitions设置分区数，提高作业并行度
+
+
+
+
+
+
+
+
+
+
 
 
 
