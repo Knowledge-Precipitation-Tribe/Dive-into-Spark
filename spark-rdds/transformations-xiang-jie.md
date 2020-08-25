@@ -178,19 +178,46 @@ randomSplitRDD(2).foreach(x => print(x +" "))
 
 ### **2、键值RDD的转换函数**
 
-**1）** **mapValus\(fun\):**对\[K,V\]型数据中的V值map操作。之间是窄依赖关系
+**1）** **mapValus\(fun\):**对pairRDD中的每个值调用map而不改变键。之间是窄依赖关系
 
+```text
+val list = List(("zhangsan", 22), ("lisi", 20), ("wangwu", 23))
+val rdd = sc.parallelize(list)
+val mapValuesRDD = rdd.mapValues(_ + 2)
+mapValuesRDD.foreach(println)
+sc.stop()
+```
 
+**输出：**
 
+```text
+(zhangsan,24)
+(lisi,22)
+(wangwu,25)
+```
 
+**2）flatMapValues\(\)** 对pairRDD中的每个值调用flatMap而不改变键，与mapValues\(\)的区别在于floatMapValues可以将值映射成多个值\(多个值成列表型 Seq\)，而mapValues只能一对一映射。
 
+```text
+val rdd = sc.parallelize(List(("zhangsan", 22), ("lisi", 20), ("wangwu", 23)))
+val flatMapValues = rdd.flatMapValues(x=> Seq(x,"male"))
+flatMapValues.foreach(println)
+```
 
+**输出：**
 
+```text
+(mobin,22)
+(mobin,male)
+(kpop,20)
+(kpop,male)
+(lufei,23)
+(lufei,male)
+```
 
+RDD依赖图：
 
-
-
-
+![](../.gitbook/assets/image%20%2843%29.png)
 
 
 
