@@ -10,11 +10,11 @@
 
 spark支持创建数据源文件的格式主要有 **csv format jdbc json load option options orc parquet schema table text textFile。**在spark-shell中为我们提供了一个SparkSession对象叫做spark，我们先通过这个对象初步了解一下Spark SQL。通过spark.read. 查看spark支持创建数据源文件的格式
 
-![](../.gitbook/assets/image%20%2858%29.png)
+![](../.gitbook/assets/image%20%2860%29.png)
 
 我们举例读取一个json文件，用DataFrame来表示：
 
-![](../.gitbook/assets/image%20%2850%29.png)
+![](../.gitbook/assets/image%20%2851%29.png)
 
 通过spark.read.json从json文件中读取数据，并返回一个DataFrame类型的对象，通过这个对象可以查看文件中的数据。
 
@@ -38,7 +38,7 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 ### 2）创建一个全局临时视图
 
-![](../.gitbook/assets/image%20%2859%29.png)
+![](../.gitbook/assets/image%20%2861%29.png)
 
 **通过createOrReplaceTempView\(\)方法为df对象创建一个临时的视图，为SQL查询提供。**
 
@@ -56,7 +56,7 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 我们先通过createOrReplaceGlobalTempView\(\)方法创建一个全局临时视图，在通过全路径访问视图。这样当我们创建一个新的Session连接的时候，依旧可以访问全局的临时视图。
 
-![](../.gitbook/assets/image%20%2853%29.png)
+![](../.gitbook/assets/image%20%2854%29.png)
 
 通过全局临时视图，就可以跨越不同的Session进行访问。
 
@@ -74,29 +74,29 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 这里我们使用DataFrame对象的 **printSchema** 方法进行查询
 
-![](../.gitbook/assets/image%20%2856%29.png)
+![](../.gitbook/assets/image%20%2857%29.png)
 
 ### 3）查看“name”列的数据以及"age+1"的数据——select
 
 这里我们使用DataFrame对象的 **select** 方法进行查询
 
-![](../.gitbook/assets/image%20%2857%29.png)
+![](../.gitbook/assets/image%20%2858%29.png)
 
 **如果涉及到运算操作的时候，每列都必须使用$或者是引号的形式表达\(单引号+字段名\)，例如年龄+1的操作。同时类似于数据库，我们可以将age+1操作后的结果从新起一个别名，则在其中加入as + "别名"。**
 
-![](../.gitbook/assets/image%20%2860%29.png)
+![](../.gitbook/assets/image%20%2862%29.png)
 
 ### 4）查看年龄大于20的数据——filter
 
 这里我们使用DataFrame对象的 **filter** 方法进行查询。
 
-![](../.gitbook/assets/image%20%2852%29.png)
+![](../.gitbook/assets/image%20%2853%29.png)
 
 ### 5）查看年龄分组的数据——groupBy
 
 这里我们使用DataFrame对象的 **groupBy** 方法进行查询。
 
-![](../.gitbook/assets/image%20%2855%29.png)
+![](../.gitbook/assets/image%20%2856%29.png)
 
 
 
@@ -112,11 +112,19 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 上例先创建一个rdd对象，通过toDF方法，传递进去列名\("id","name","age"\)，再将RDD转化成DataFrame对象。但是在实际工作中会使用 **样例类** 的方式进行转换。**这样做的好处是，在我们没有给toDF传入列名时，会使用样例类中的属性名来代替，如果此时依旧通过toDF传递列名\(此时必须传入全部分列名\)，则会覆盖样例类中的属性名。**
 
-![](../.gitbook/assets/image%20%2861%29.png)
+![](../.gitbook/assets/image%20%2863%29.png)
 
 ### 2）DataFrame转换成RDD
 
+由于DataFrame本身是RDD封装而来，所以可以直接通过DataFrame获取内部的RDD。
 
+![](../.gitbook/assets/image%20%2859%29.png)
+
+此时通过rdd方法返回的是一个Row对象。
+
+总的来说DF与RDD的转换其实就是如下图所示：
+
+![DF&#x4E0E;RDD&#x8F6C;&#x6362;&#x56FE;](../.gitbook/assets/image%20%2850%29.png)
 
 
 
