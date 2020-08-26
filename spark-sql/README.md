@@ -18,13 +18,33 @@ Spark SQL来自于Shark**\(Hive on Spark\)**，而Shark是参考hive把类 sql �
 
       DataFrame是一种基于RDD为基础的分布式数据集，类似于传统数据库中的二维表格，DataFrame和RDD的主要区别在于前者有Schema信息，即在DataFrame中数据存在列名和数据类型，这使得Spark SQL可以在DataFrame数据集上进行操作。**除此之外DataFrame还支持嵌套数据类型，提供了一套高级的关系操作API。**
 
+### DataSet
 
-
-
+      DastaSet是一个新的分布式数据集合，是Spark1.6新加的抽象，是DataFrame的一个扩展。它提供了RDD的优势以及Spark SQL的优化执行引擎的优点。
 
 ### **Spark架构**
 
 ### **Spark特点**
+
+#### 1 集成
+
+无缝地将SQL查询与Spark程序混合。 Spark SQL允许您将结构化数据作为Spark中的分布式数据集\(RDD\)进行查询，在Python，Scala和Java中集成了API。这种紧密的集成使得可以轻松地运行SQL查询以及复杂的分析算法。
+
+#### 2 统一数据访问
+
+加载和查询来自各种来源的数据。 Schema-RDDs提供了一个有效处理结构化数据的单一接口，包括Apache Hive表，**HDFS**文件和JSON文件。
+
+#### 4.3 Hive兼容性
+
+在现有仓库上运行未修改的Hive查询。 Spark SQL重用了Hive前端和MetaStore，为您提供与现有Hive数据，查询和UDF的完全兼容性。只需将其与Hive一起安装即可。
+
+#### 4.4 标准连接
+
+通过JDBC或ODBC连接。 Spark SQL包括具有行业标准JDBC和ODBC连接的服务器模式。
+
+#### 4.5 可扩展性
+
+对于交互式查询和长查询使用相同的引擎。 Spark SQL利用RDD模型来支持中查询容错，使其能够扩展到大型作业。不要担心为历史数据使用不同的引擎。
 
 \*\*\*\*
 
