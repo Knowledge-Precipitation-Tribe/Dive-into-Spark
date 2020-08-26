@@ -10,7 +10,7 @@
 
 spark支持创建数据源文件的格式主要有 **csv format jdbc json load option options orc parquet schema table text textFile。**在spark-shell中为我们提供了一个SparkSession对象叫做spark，我们先通过这个对象初步了解一下Spark SQL。通过spark.read. 查看spark支持创建数据源文件的格式
 
-![](../.gitbook/assets/image%20%2852%29.png)
+![](../.gitbook/assets/image%20%2857%29.png)
 
 我们举例读取一个json文件，用DataFrame来表示：
 
@@ -38,7 +38,7 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 ### 2）创建一个全局临时视图
 
-![](../.gitbook/assets/image%20%2853%29.png)
+![](../.gitbook/assets/image%20%2858%29.png)
 
 **通过createOrReplaceTempView\(\)方法为df对象创建一个临时的视图，为SQL查询提供。**
 
@@ -56,41 +56,63 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 我们先通过createOrReplaceGlobalTempView\(\)方法创建一个全局临时视图，在通过全路径访问视图。这样当我们创建一个新的Session连接的时候，依旧可以访问全局的临时视图。
 
-![](../.gitbook/assets/image%20%2850%29.png)
+![](../.gitbook/assets/image%20%2852%29.png)
+
+通过全局临时视图，就可以跨越不同的Session进行访问。
+
+## 3、DSL语法
+
+         DataFrame提供了一个特定领域语言\(domain-specific language,DSL\)去管理结构化数据，使用DSL语法就不必去创建临时视图了。我们也可以在Java、python、Scala和R中使用DSL。下面举例来说明：
+
+### 1）创建一个DataFrame
+
+![](../.gitbook/assets/image%20%2847%29.png)
+
+依旧是通过读取json文件来创建一个DataFrame的对象。
+
+### 2）查看DataFrame的Schema信息——**printSchema** 
+
+这里我们使用DataFrame对象的 **printSchema** 方法进行查询
+
+![](../.gitbook/assets/image%20%2855%29.png)
+
+### 3）查看“name”列的数据以及"age+1"的数据——select
+
+这里我们使用DataFrame对象的 **select** 方法进行查询
+
+![](../.gitbook/assets/image%20%2856%29.png)
+
+**如果涉及到运算操作的时候，每列都必须使用$或者是引号的形式表达\(单引号+字段名\)，例如年龄+1的操作。同时类似于数据库，我们可以将age+1操作后的结果从新起一个别名，则在其中加入as + "别名"。**
+
+![](../.gitbook/assets/image%20%2859%29.png)
+
+### 4）查看年龄大于20的数据——filter
+
+这里我们使用DataFrame对象的 **filter** 方法进行查询。
+
+![](../.gitbook/assets/image%20%2851%29.png)
+
+### 5）查看年龄分组的数据——groupBy
+
+这里我们使用DataFrame对象的 **groupBy** 方法进行查询。
+
+![](../.gitbook/assets/image%20%2854%29.png)
 
 
 
+## 4、DataFrame与RDD的相互转换
 
+在开始我们说过DataFrame的创建方式有三种，其中一种就是从现有的RDD进行转换，那么就看看如何将两者进行转换\(注意：在IDEA开发时，将DF和RDD进行互操作时，必须要引入  import spark.implicits.\_     在spark-shell中则无需引入\)
 
+### 1）RDD转换成DataFrame
 
+这里我们可以通过RDD对象中的 **toDF** 方法将RDD转换成DataFrame类型。
 
+![](../.gitbook/assets/image%20%2861%29.png)
 
+上例创建一个rdd对象，通过toDF方法，告知该值得列名为id，将RDD转化成DataFrame对象。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### 2）DataFrame转换成RDD
 
 
 
