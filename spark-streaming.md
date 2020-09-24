@@ -26,9 +26,26 @@ Spark Streaming的工作原理主要是在接收实时输入数据流，然后�
 
 ![](.gitbook/assets/image%20%2869%29.png)
 
+## 4、DStream编程：
 
+下面先写一个小例子看一下如何编写DStream。
 
+* **启动netcat服务器**：首先我们通过使用netcat来监听数据流端口
 
+```text
+$> nc -lk 9999
+```
+
+* **配置依赖**：通过使用IDEA进行编写，首先需要在pom.xml中引入Spreak Stream依赖。
+
+```text
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-streaming_2.11</artifactId>
+    <version>2.1.0</version>
+</dependency>
+
+```
 
 \*\*\*\*
 
