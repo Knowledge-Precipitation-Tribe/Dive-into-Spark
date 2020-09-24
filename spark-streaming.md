@@ -51,7 +51,7 @@ $> nc -lk 9999
   * 首先定义SparkSession和Spark上下文
 
   ```text
-  val spark = SparkSession.builder.appName(getClass.getSimpleName).getOrCreate()
+  val spark = SparkSession.builder.appName(getClass.getSimpleName).master("local").getOrCreate()
   val sc = spark.sparkContext
   val ssc = new StreamingContext(sc,Seconds(10))
   ```
