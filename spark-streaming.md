@@ -44,22 +44,47 @@ $> nc -lk 9999
     <artifactId>spark-streaming_2.11</artifactId>
     <version>2.1.0</version>
 </dependency>
-
 ```
 
-\*\*\*\*
+* **编程过程：**
 
-\*\*\*\*
+  * 首先定义SparkSession和Spark上下文
 
-\*\*\*\*
+  ```text
+  val spark = SparkSession.builder.appName(getClass.getSimpleName).getOrCreate()
+  val sc = spark.sparkContext
+  val ssc = new StreamingContext(sc,Seconds(10))
+  ```
 
-\*\*\*\*
+  * 创建离散流，通过StreamimgContext对象的socketTextStream方法来创建离散流，其中第一个参数是地址，参数二是对应的端口。
 
-\*\*\*\*
+  ```text
+  //创建离散流
+  val stream  = ssc.socketTextStream("loaclhost",
+                                  9999,StorageLevel.MEMORY_AND_DISK_SER)
+  ```
 
-\*\*\*\*
+  * 进行窗口化操作。
 
-\*\*\*\*
+  ```text
+  //创建离散流
+  val stream  = ssc.socketTextStream("loaclhost",9999,StorageLevel.MEMORY_AND_DISK_SER)
+  //窗口化操作
+  val erroeLines =  stream.filter(line=>line.contains("ERROR"))
+  erroeLines.print()
+  erroeLines.countByWindow(Seconds(30),Seconds(10)).print()    
+  ```
+
+  * 最后启动流操作
+
+
+
+  ```text
+  //启动流
+  ssc.start()
+  //等待指令结束
+  ssc.awaitTermination()
+  ```
 
 \*\*\*\*
 
