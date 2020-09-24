@@ -1,4 +1,4 @@
-# Spark SQL之DataFrame
+# DataFrame与DataSet
 
          前面我们介绍过Spark对RDD进行封装得到的一个分布式的数据集，它与RDD最大的不同在于提供的更像是一个传统的数据库里面的表，他除了数据之外还能够知道更多的信息，比如说列名、列值和列的属性，这一点就和hive很类似了，而且他也能够支持一些复杂的数据格式。同时DataFrame可以从不同来源的数组构造，例如Hive表，结构化数据文件，外部数据库或现有RDD。
 
@@ -120,13 +120,13 @@ SQL语法风格指的是我们查询数据的时候使用SQL语句来查询，�
 
 ![](../.gitbook/assets/image%20%2859%29.png)
 
-此时通过rdd方法返回的是一个Row对象。
+此时通过rdd方法返回的是一个Row对象,对于Row对象其实就是一个Array数组，可以通过Array\(index\)进行访问。
 
 总的来说DF与RDD的转换其实就是如下图所示：
 
 ![DF&#x4E0E;RDD&#x8F6C;&#x6362;&#x56FE;](../.gitbook/assets/image%20%2850%29.png)
 
-
+## 5、DataFrame 函数
 
 
 

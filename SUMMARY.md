@@ -12,7 +12,7 @@
   * [RDDs 的函数](spark-rdds/transformations-xiang-jie.md)
 * [Spark SQL](spark-sql/README.md)
   * [Spark SQL](spark-sql/untitled.md)
-  * [Spark SQL之DataFrame](spark-sql/spark-sql-zhi-dataframe.md)
+  * [DataFrame与DataSet](spark-sql/spark-sql-zhi-dataframe.md)
 * [Spark Streaming](spark-streaming.md)
 * [Graph X](graph-x.md)
 * [参考文献](can-kao-wen-xian-1.md)
